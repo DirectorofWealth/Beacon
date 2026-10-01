@@ -54,14 +54,11 @@ export const LandingPage = ({ onNavigate }) => {
           <button onClick={() => onNavigate('landing')} className="focus:outline-hidden focus:ring-2 focus:ring-amber-500 rounded-lg">
             <BrandLogo size="md" showSubtitle={false}/>
           </button>
-
           <div className="flex items-center gap-2.5 sm:gap-3">
             <ThemeToggle size="sm"/>
-
             <button onClick={() => onNavigate('report')} className="px-3.5 py-2 rounded-lg text-xs font-bold text-[#0F172A] dark:text-slate-200 border border-[#D5CEC0] dark:border-slate-700 bg-white/70 dark:bg-slate-800/80 hover:bg-white dark:hover:bg-slate-700 hover:border-slate-400 transition-colors shadow-2xs">
               Report Incident
             </button>
-
             <button onClick={() => onNavigate('register')} className="px-4 py-2 rounded-lg text-xs font-bold tracking-wide uppercase text-white bg-[#0B1728] dark:bg-blue-600 hover:bg-[#15253F] dark:hover:bg-blue-500 transition-all shadow-xs">
               Create Account
             </button>
@@ -77,17 +74,14 @@ export const LandingPage = ({ onNavigate }) => {
                 <span className="w-2 h-2 rounded-full bg-[#E5A00D] shadow-[0_0_8px_#E5A00D] animate-pulse"/>
                 <span>LIVE ESTATE MONITORING</span>
               </div>
-
               <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-[#0B192C] dark:text-white leading-[1.05]">
                 Light the <br />
                 way to <span className="text-[#E5A00D]">safer</span> <br />
                 neighborhoods.
               </h1>
-
               <p className="text-base sm:text-lg text-[#475569] dark:text-slate-300 max-w-xl leading-relaxed">
                 Operational clarity for Nigerian estates. A unified command surface for residents, patrol teams, and administrators.
               </p>
-
               <div className="flex flex-wrap items-center gap-3 pt-2">
                 <button onClick={() => onNavigate('report')} className="px-6 py-3.5 rounded-lg bg-[#0B1728] dark:bg-blue-600 hover:bg-[#182C48] dark:hover:bg-blue-500 text-white font-bold text-sm tracking-wide transition-all shadow-md flex items-center gap-2">
                   <PlusCircle className="w-4 h-4 text-[#E5A00D] dark:text-white"/>
@@ -102,11 +96,9 @@ export const LandingPage = ({ onNavigate }) => {
 
 
             </div>
-
             <div className="lg:col-span-5">
               <div className="bg-[#0B1728] border border-slate-800 rounded-2xl p-6 sm:p-7 text-white shadow-2xl space-y-6 relative overflow-hidden">
                 <div className="absolute inset-0 bg-[radial-gradient(#1E293B_1px,transparent_1px)] [background-size:16px_16px] opacity-20 pointer-events-none"/>
-
                 <div className="relative flex items-center justify-between border-b border-slate-800/90 pb-4">
                   <div className="flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-[#E5A00D] animate-ping"/>
@@ -231,7 +223,6 @@ export const LandingPage = ({ onNavigate }) => {
             </div>
           </div>
         </section>
-
         <section id="roles" className="border-t border-b border-[#E2DDD3] dark:border-slate-800 bg-white/60 dark:bg-slate-900/40">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
             <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#E2DDD3] dark:divide-slate-800">
@@ -273,7 +264,6 @@ export const LandingPage = ({ onNavigate }) => {
             </div>
           </div>
         </section>
-
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4 space-y-5">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#E2DDD3] dark:border-slate-800 pb-4">
             <div>
@@ -301,7 +291,7 @@ export const LandingPage = ({ onNavigate }) => {
                 <Activity className="w-4 h-4 text-blue-600 dark:text-blue-400"/>
               </div>
               <div className="text-3xl sm:text-4xl font-extrabold text-[#0F172A] dark:text-white font-mono">
-                {stats?.overview?.totalIncidentsReported || totalReports || 127}
+                {stats?.overview?.totalIncidentsReported ?? totalReports ?? 0}
               </div>
               <p className="text-xs text-[#64748B] dark:text-slate-400 mt-1">Logged across all estate zones</p>
             </div>
@@ -314,10 +304,10 @@ export const LandingPage = ({ onNavigate }) => {
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400"/>
               </div>
               <div className="text-3xl sm:text-4xl font-extrabold text-[#059669] dark:text-emerald-400 font-mono">
-                {stats?.overview?.resolutionRatePercentage || `${Math.round((resolvedCount / totalReports) * 100)}%` || '89%'}
+                {stats?.overview?.resolutionRatePercentage ?? `${totalReports > 0 ? Math.round((resolvedCount / totalReports) * 100) : 0}%`}
               </div>
               <p className="text-xs text-[#64748B] dark:text-slate-400 mt-1">
-                {stats?.overview?.resolvedIncidents || resolvedCount || 113} incidents closed
+                {stats?.overview?.resolvedIncidents ?? resolvedCount ?? 0} incidents closed
               </p>
             </div>
 
@@ -329,7 +319,7 @@ export const LandingPage = ({ onNavigate }) => {
                 <Shield className="w-4 h-4 text-blue-600 dark:text-blue-400"/>
               </div>
               <div className="text-3xl sm:text-4xl font-extrabold text-[#2563EB] dark:text-blue-400 font-mono">
-                {stats?.overview?.activePatrolShifts || 4}
+                {stats?.overview?.activePatrolShifts ?? 0}
               </div>
               <p className="text-xs text-[#64748B] dark:text-slate-400 mt-1">Guards walking active shifts</p>
             </div>
@@ -348,7 +338,6 @@ export const LandingPage = ({ onNavigate }) => {
             </div>
           </div>
         </section>
-
         <section id="lifecycle" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 space-y-12">
           <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 border-b border-[#E2DDD3] dark:border-slate-800 pb-5">
             <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-[#0B192C] dark:text-white">
@@ -397,7 +386,6 @@ export const LandingPage = ({ onNavigate }) => {
             </div>
           </div>
         </section>
-
 
       </main>
     </div>);

@@ -10,8 +10,8 @@ export const ThemeProvider = ({ children }) => {
             }
         }
         catch {
-            return 'light';
         }
+        return 'light';
     });
     const [systemIsDark, setSystemIsDark] = useState(() => {
         if (typeof window !== 'undefined' && window.matchMedia) {
@@ -57,7 +57,6 @@ export const ThemeProvider = ({ children }) => {
             localStorage.setItem(THEME_STORAGE_KEY, newTheme);
         }
         catch {
-            /* noop */
         }
     };
     const toggleTheme = () => {
