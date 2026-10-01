@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 440" fill="none">
+  <!-- Spire & Lantern Cap -->
+  <path d="M72 0 L80 0 L80 20 L94 20 L76 74 L68 74 L50 20 L64 20 L64 0 Z" fill="#F8FAFC"/>
+  <rect x="46" y="74" width="52" height="12" rx="3" fill="#F8FAFC"/>
+  <!-- Lighthouse Tower & B Lobes -->
+  <path d="M47 86 L22 430 L115 430 C206 430 252 388 252 316 C252 270 226 235 180 218 C216 202 236 172 236 130 C236 72 190 38 116 38 L72 38 L72 86 Z" fill="#F8FAFC"/>
+  <!-- Amber Beacon Lantern Light -->
+  <circle cx="150" cy="136" r="40" fill="#E5A00D"/>
+  <!-- Transparent / Dark Counter Circle -->
+  <circle cx="168" cy="310" r="50" fill="#0B192C"/>
+</svg>

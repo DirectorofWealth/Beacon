@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <rect width="512" height="512" rx="112" fill="#0B192C"/>
+  <!-- Lighthouse B Stem and Tower -->
+  <g transform="translate(100, 42)">
+    <!-- Spire & Roof -->
+    <path d="M102 0 L110 0 L110 24 L126 24 L106 82 L98 82 L78 24 L94 24 L94 0 Z" fill="#F8FAFC"/>
+    <rect x="74" y="82" width="56" height="12" rx="3" fill="#F8FAFC"/>
+    <!-- Lighthouse Tower Body & B Lobe -->
+    <path d="M75 94 L50 420 L136 420 C220 420 262 380 262 312 C262 268 238 236 195 220 C228 206 248 178 248 140 C248 85 204 54 134 54 L98 54 L98 94 Z" fill="#F8FAFC"/>
+    <!-- Lantern Light (Amber Beacon) -->
+    <circle cx="170" cy="144" r="38" fill="#E5A00D"/>
+    <!-- Lower Window / Counter -->
+    <circle cx="186" cy="308" r="48" fill="#0B192C"/>
+  </g>
+</svg>

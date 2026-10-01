@@ -1,0 +1,6 @@
+{
+  "name": "Beacon — Community Safety Platform",
+  "description": "Integrated design language and production safety platform connecting residents, patrol officers, and estate administrators with structured incident reporting, live patrol tracking, and targeted emergency alerts.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
