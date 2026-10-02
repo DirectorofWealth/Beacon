@@ -13,12 +13,50 @@ import { AlertsPage } from './pages/AlertsPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { AuthPage } from './pages/AuthPages';
 import { DesignSystemSpecModal } from './components/docs/DesignSystemSpecModal';
+
+const NAVIGATION_STORAGE_KEY = 'beacon_navigation_state';
+const APP_VIEWS = ['landing', 'home', 'incidents', 'incident-detail', 'report', 'patrol', 'alerts', 'profile', 'login', 'register'];
+const PROTECTED_VIEWS = ['report', 'patrol', 'alerts', 'profile', 'incidents', 'incident-detail', 'home'];
+
+function getInitialNavigation() {
+    try {
+        const saved = JSON.parse(window.sessionStorage.getItem(NAVIGATION_STORAGE_KEY) || 'null');
+        if (!saved || !APP_VIEWS.includes(saved.currentView)) {
+            return { currentView: 'landing', selectedIncidentId: null, postAuthRedirect: null };
+        }
+        if (saved.currentView === 'incident-detail' && !saved.selectedIncidentId) {
+            return { currentView: 'landing', selectedIncidentId: null, postAuthRedirect: null };
+        }
+        return {
+            currentView: saved.currentView,
+            selectedIncidentId: saved.selectedIncidentId || null,
+            postAuthRedirect: PROTECTED_VIEWS.includes(saved.postAuthRedirect) ? saved.postAuthRedirect : null,
+        };
+    }
+    catch {
+        return { currentView: 'landing', selectedIncidentId: null, postAuthRedirect: null };
+    }
+}
+
 function BeaconApp() {
     const { isAuthenticated } = useAuth();
-    const [currentView, setCurrentView] = useState('landing');
-    const [selectedIncidentId, setSelectedIncidentId] = useState(null);
+    const [initialNavigation] = useState(getInitialNavigation);
+    const [currentView, setCurrentView] = useState(initialNavigation.currentView);
+    const [selectedIncidentId, setSelectedIncidentId] = useState(initialNavigation.selectedIncidentId);
     const [docsModalOpen, setDocsModalOpen] = useState(false);
-    const [postAuthRedirect, setPostAuthRedirect] = useState(null);
+    const [postAuthRedirect, setPostAuthRedirect] = useState(initialNavigation.postAuthRedirect);
+    useEffect(() => {
+        try {
+            window.sessionStorage.setItem(NAVIGATION_STORAGE_KEY, JSON.stringify({
+                currentView,
+                selectedIncidentId,
+                postAuthRedirect,
+            }));
+        }
+        catch {
+            // Keep navigation usable if browser storage is unavailable.
+        }
+    }, [currentView, selectedIncidentId, postAuthRedirect]);
     useEffect(() => {
         if (isAuthenticated && (currentView === 'login' || currentView === 'register')) {
             if (postAuthRedirect) {
@@ -35,8 +73,7 @@ function BeaconApp() {
         if (id) {
             setSelectedIncidentId(id);
         }
-        const protectedViews = ['report', 'patrol', 'alerts', 'profile', 'incidents', 'incident-detail', 'home'];
-        if (!isAuthenticated && protectedViews.includes(view)) {
+        if (!isAuthenticated && PROTECTED_VIEWS.includes(view)) {
             setPostAuthRedirect(view);
             setCurrentView('login');
             window.scrollTo({ top: 0, behavior: 'smooth' });
