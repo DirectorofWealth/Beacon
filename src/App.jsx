@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ThemeProvider } from './context/ThemeContext';
-import { AuthProvider, useAuth, getStoredUser } from './context/AuthContext';
+import { AuthProvider, useAuth } from './context/AuthContext';
 import { Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
 import { LandingPage } from './pages/LandingPage';
@@ -15,9 +15,7 @@ import { AuthPage } from './pages/AuthPages';
 import { DesignSystemSpecModal } from './components/docs/DesignSystemSpecModal';
 function BeaconApp() {
     const { isAuthenticated } = useAuth();
-    const [currentView, setCurrentView] = useState(() => {
-        return getStoredUser() ? 'home' : 'landing';
-    });
+    const [currentView, setCurrentView] = useState('landing');
     const [selectedIncidentId, setSelectedIncidentId] = useState(null);
     const [docsModalOpen, setDocsModalOpen] = useState(false);
     const [postAuthRedirect, setPostAuthRedirect] = useState(null);

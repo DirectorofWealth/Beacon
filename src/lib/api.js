@@ -48,9 +48,7 @@ async function apiFetch(endpoint, options = {}) {
     if (res.status === 401) {
         setStoredToken(null);
         setStoredUser(null);
-        if (!window.location.pathname.includes('/login')) {
-            window.location.href = '/login';
-        }
+        window.dispatchEvent(new Event('beacon:unauthorized'));
     }
 
     if (!res.ok) {

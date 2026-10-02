@@ -7,6 +7,12 @@ export const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(() => getStoredToken());
     const [loading, setLoading] = useState(true);
     useEffect(() => {
+        const handleUnauthorized = () => {
+            setUser(null);
+            setToken(null);
+        };
+        window.addEventListener('beacon:unauthorized', handleUnauthorized);
+
         async function initSession() {
             const storedTok = getStoredToken();
             if (storedTok) {
@@ -29,6 +35,7 @@ export const AuthProvider = ({ children }) => {
             setLoading(false);
         }
         initSession();
+        return () => window.removeEventListener('beacon:unauthorized', handleUnauthorized);
     }, []);
     const login = useCallback(async (email, password) => {
         setLoading(true);
